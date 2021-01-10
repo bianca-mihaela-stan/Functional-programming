@@ -1,5 +1,5 @@
 # Examen DAW
-##### Controller
+### Controller
 - redenumirea actiunilor:
     ````C++
         [ActionName("about")]
@@ -135,7 +135,7 @@
     - in Package Console:
         - `Add-Migration Initial`
         - `Update-Database`
-##### Rutare
+### Rutare
 - rutare cu 2 parametri:
     ````C++
     routes.MapRoute(
@@ -176,7 +176,7 @@
        constraints: new { user_id = @"\d+" }
     );
     ````
-##### View-uri
+### View-uri
 - formular pentru new doar cu HTML:
     ````HTML
     <form method="post" action="/Students/New">
@@ -254,7 +254,7 @@
             }
             ````
 - view-uri partiale: `@Html.Partial("StudentInfo", student);`
-##### Modele
+### Modele
 - adaugarea Entity Framework in cadrul modelelor
     ````C++
     public class StudentDBContext : DbContext
@@ -361,7 +361,7 @@
         
     }
     ````
-##### LINQ
+### LINQ
 - exemplu:
     ````
     from stud in db.Students
