@@ -173,7 +173,7 @@
            action = "Show",
            user_id = UrlParameter.Optional
        },
-       constraints: new { user_id = @"\d+" }
+       constraints: new { user_id = @"\d+" } // user_id accepta doar cifre
     );
     ````
 ### View-uri
