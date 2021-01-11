@@ -127,8 +127,8 @@
     - Package Manager Console `enable-migrations -EnableAutomaticMigrations:$true`
     - Migration -> Configuration
         ````
-        AutomaticMigrationDataLossAllowed
-        ContextKey = "Curs4Partea2.AppContext"
+        AutomaticMigrationDataLossAllowed = true;
+        ContextKey = "Curs4Partea2.AppContext";
         ````
     - in AppContext `Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppContext,
           Curs4Partea2.Migrations.Configuration>("DBConnectionString"));`
