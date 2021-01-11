@@ -311,55 +311,17 @@
         public virtual ICollection<Comment> Comments { get; set; }
         ````
 - relatie many to many:
-    - pentru a se adauga automat tabelul de legatura se adauga in Initial.cs metoda:
+    - pentru a se adauga automat tabelul de legatura se adauga:
+        ````C++
+        public virtual ICollection<Course> Courses {get; set;}
+        public virtual ICollection<Student> Students {get; set;}
+        ````
+    - pentru adaugare proprietati pe tabela asociativa se fac 3 tabele:
     ````C++
-    public override void Up()
-    {
-        CreateTable(
-            "dbo.Cities",
-            c => new
-                {
-                    CityId = c.Int(nullable: false, identity: true),
-                    CityName = c.String(),
-                    CountryId = c.Int(nullable: false),
-                    Country_CoutryId = c.Int(),
-                })
-            .PrimaryKey(t => t.CityId)
-            .ForeignKey("dbo.Countries", t => t.Country_CoutryId)
-            .Index(t => t.Country_CoutryId);
-        
-        CreateTable(
-            "dbo.Countries",
-            c => new
-                {
-                    CoutryId = c.Int(nullable: false, identity: true),
-                    CountryName = c.String(),
-                })
-            .PrimaryKey(t => t.CoutryId);
-        
-        CreateTable(
-            "dbo.Profiles",
-            c => new
-                {
-                    ProfileId = c.Int(nullable: false, identity: true),
-                    ProfileVisibility = c.Boolean(nullable: false),
-                    Description = c.String(),
-                    Gender = c.Boolean(nullable: false),
-                    Birthday = c.DateTime(nullable: false),
-                    CityId = c.Int(nullable: false),
-                    CountryId = c.Int(nullable: false),
-                    UserId = c.String(maxLength: 128),
-                    Country_CoutryId = c.Int(),
-                })
-            .PrimaryKey(t => t.ProfileId)
-            .ForeignKey("dbo.Cities", t => t.CityId, cascadeDelete: true)
-            .ForeignKey("dbo.Countries", t => t.Country_CoutryId)
-            .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-            .Index(t => t.CityId)
-            .Index(t => t.UserId)
-            .Index(t => t.Country_CoutryId);
-        
-    }
+    Student: public virtual ICollection<Registration> Registrations {get; set;}
+    Course: public virtual ICollection<Registration> Registrations {get; set;}
+    Registration: public virtual Course Course {get; set; }
+                  public virtual Student Student {get; set; }
     ````
 ### LINQ
 - exemplu:
