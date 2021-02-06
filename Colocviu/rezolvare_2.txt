@@ -1,28 +1,42 @@
---am verificat pe ["aba"] -> True si ["aab"] -> Flase ["abc", "abba"] -> True
---functia recursiva
-sbr1 :: [String] -> Bool
-sbr1 [] = False
-sbr1 list@(x:xs)
-    | x==reverse x = True
-    | otherwise = sbr1 xs
+--am "spart" problema in 3 mini probleme
+--1. comprim aparitiile lui 0
+
+sbr4 :: [Int] -> [Int]
+sbr4 [] = [] -- tratez cazurile care nu sunt tratate in cazul general
+sbr4 [a] =[a]
+sbr4 [a,b] = if a==b && a==0 then [0] else [a,b]
+sbr4 [a,b,c] 
+    | a==b && b==c && c==0 = [0]
+    | a==b && b==0 = [0,c]
+    | b==c && c==0 =[a,0]
+    | otherwise = [a,b,c]
+sbr4 list@(x:y:z:zs) --acum se intra pe cazul general
+    | x==y && y==0 = sbr4 (y:z:zs) --daca gasesc 2 0 unul langa altul il "ignor" pe primul
+    | otherwise = x: sbr4 (y:z:zs)
+
+--2. sa elimin aparitiile lui 0 dinainte de 1
+sbr5 :: [Int] -> [Int]
+sbr5 []=[] -- tratex cazurile car nu intra in cazul general
+sbr5 [a] = [a]
+sbr5 (x:y:ys)
+    | x==0 && y==1 = sbr5(y:ys) -- daca am un 0 inainte de 1 il ignor pe 0
+    | otherwise = x:sbr5(y:ys)
+
+--3. sa elimin aparitiile lui 1 inainte de 0
+-- voi face acest lucru apeland sbr5 pe lista reversed
 
 
---functia folosind descrieri de liste
-sbr2 :: [String] -> Bool
-sbr2 list = length [x| x<-list, x==reverse x] >0
+--in final, functia mea este:
+sbr6 :: [Int] -> [Int]
+sbr6 list = reverse eliminare_1_inainte_de_0 --trebuie sa intorc din nou lista ca fusese intoarsa pentru functia sbr5
+    where
+     -- sper ca denumirile variabilelor sunt destul de clare
+        eliminare_0 = sbr4 list
+        eliminare_0_inainte_de_1 = sbr5 eliminare_0
+        eliminare_1_inainte_de_0 = sbr5 (reverse eliminare_0_inainte_de_1) --ideea de a face pe lista reversed de care am vorbit mai devreme
 
-
---functia folosind functii de nivel inalt
-
-sbr3 :: [String] -> Bool
-sbr3 list= length (filter (\x -> x==reverse x) list) >0
-
---functia care testeaza rezolvarea de la punctul 1 cu cea de la punctul 3
---functioneaza pe toate cele 100 de teste
-sbr13 :: [String] -> Bool
-sbr13 list = sbr1 list == sbr3 list 
-
---in plus, functia care testeaza ca toate cele 3 functii se comporat identic
---functioneaza pe toate cele 100 de teste
-sbr123 :: [String] -> Bool
-sbr123 list = sbr1 list == sbr2 list && sbr2 list == sbr3 list 
+--am testat pe [3,0,0,1,0,2,0,0] -> [3,1,2,0]
+--[3,0,0,1,0,2,0,0,4,5,0] -> [3,1,2,0,4,5,0]
+--[0,0,0] -> [0]
+--[1,0,1] -> [1,1]
+--[0,0,0,1,1,0,1,2,0,0,0] -> [1,1,1,2,0]

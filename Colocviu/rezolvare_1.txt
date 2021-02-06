@@ -1,0 +1,28 @@
+--am verificat pe ["aba"] -> True si ["aab"] -> Flase ["abc", "abba"] -> True
+--functia recursiva
+sbr1 :: [String] -> Bool
+sbr1 [] = False
+sbr1 list@(x:xs)
+    | x==reverse x = True
+    | otherwise = sbr1 xs
+
+
+--functia folosind descrieri de liste
+sbr2 :: [String] -> Bool
+sbr2 list = length [x| x<-list, x==reverse x] >0
+
+
+--functia folosind functii de nivel inalt
+
+sbr3 :: [String] -> Bool
+sbr3 list= length (filter (\x -> x==reverse x) list) >0
+
+--functia care testeaza rezolvarea de la punctul 1 cu cea de la punctul 3
+--functioneaza pe toate cele 100 de teste
+sbr13 :: [String] -> Bool
+sbr13 list = sbr1 list == sbr3 list 
+
+--in plus, functia care testeaza ca toate cele 3 functii se comporat identic
+--functioneaza pe toate cele 100 de teste
+sbr123 :: [String] -> Bool
+sbr123 list = sbr1 list == sbr2 list && sbr2 list == sbr3 list 
