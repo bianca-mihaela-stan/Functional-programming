@@ -4,16 +4,16 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 51c01930cbbcf01fef9ca92ec0231fa337284cc13f14c3e8b267cbfc437cf57f
+-- hash: 40961711236c154874bd8ccd1925a067d8a2a1ef18227fbe4b0d7c3fd3a9bbe1
 
-name:           colocviu
+name:           examen
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/colocviu#readme>
-homepage:       https://github.com/githubuser/colocviu#readme
-bug-reports:    https://github.com/githubuser/colocviu/issues
+description:    Please see the README on GitHub at <https://github.com/githubuser/examen#readme>
+homepage:       https://github.com/githubuser/examen#readme
+bug-reports:    https://github.com/githubuser/examen/issues
 author:         Author name here
 maintainer:     example@example.com
-copyright:      2020 Author name here
+copyright:      2021 Author name here
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -23,51 +23,58 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/githubuser/colocviu
+  location: https://github.com/githubuser/examen
 
 library
   exposed-modules:
+      Applic
+      BTree
+      Expresii
+      Foldables
+      Functori
       Lib
-      Lib1
-      Reader
+      Simulare
   other-modules:
-      Paths_colocviu
+      Paths_examen
   hs-source-dirs:
       src
   build-depends:
       QuickCheck
     , base >=4.7 && <5
+    , containers >=0.6.2.1
     , mtl >=2.2
     , random >=1.1
   default-language: Haskell2010
 
-executable colocviu-exe
+executable examen-exe
   main-is: Main.hs
   other-modules:
-      Paths_colocviu
+      Paths_examen
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base >=4.7 && <5
-    , colocviu
+    , containers >=0.6.2.1
+    , examen
     , mtl >=2.2
     , random >=1.1
   default-language: Haskell2010
 
-test-suite colocviu-test
+test-suite examen-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_colocviu
+      Paths_examen
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       QuickCheck
     , base >=4.7 && <5
-    , colocviu
+    , containers >=0.6.2.1
+    , examen
     , mtl >=2.2
     , random >=1.1
   default-language: Haskell2010

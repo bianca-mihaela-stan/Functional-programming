@@ -1,10 +1,10 @@
-name:                colocviu
+name:                examen
 version:             0.1.0.0
-github:              "githubuser/colocviu"
+github:              "githubuser/examen"
 license:             BSD3
 author:              "Author name here"
 maintainer:          "example@example.com"
-copyright:           "2020 Author name here"
+copyright:           "2021 Author name here"
 
 extra-source-files:
 - README.md
@@ -17,19 +17,20 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/colocviu#readme>
+description:         Please see the README on GitHub at <https://github.com/githubuser/examen#readme>
 
 dependencies:
 - base >= 4.7 && < 5
 - QuickCheck
 - random >= 1.1
 - mtl >= 2.2
+- containers >= 0.6.2.1
 
 library:
   source-dirs: src
 
 executables:
-  colocviu-exe:
+  examen-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -37,10 +38,10 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - colocviu
+    - examen
 
 tests:
-  colocviu-test:
+  examen-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -48,4 +49,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - colocviu
+    - examen
